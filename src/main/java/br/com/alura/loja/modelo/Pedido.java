@@ -2,12 +2,14 @@ package br.com.alura.loja.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +23,10 @@ public class Pedido {
 	
 	@ManyToOne //vários pedidos (Many) podem pertencer a um cliente (One);
 	private Cliente cliente;
-
+	
+	@OneToMany //um pedido (One) para muitos produtos (Many) 
+	private List<ItemPedido> produtos;
+	
 	public Pedido() {
 	}
 
