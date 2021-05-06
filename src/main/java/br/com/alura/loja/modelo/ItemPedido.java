@@ -22,7 +22,7 @@ public class ItemPedido {
 	
 	@ManyToOne //Muitos itens (Many) para um pedido (One)
 	private Pedido pedido;
-	@ManyToOne //
+	@ManyToOne //Um item (One) pode estar em vários produtos (Many)
 	private Produto produto;
 	
 	public ItemPedido() {
