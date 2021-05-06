@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +21,15 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name="valor_total")
 	private BigDecimal valorTotal;
 	private LocalDate data = LocalDate.now();
 	
 	@ManyToOne //vários pedidos (Many) podem pertencer a um cliente (One);
 	private Cliente cliente;
 	
-	@OneToMany (mappedBy="pedido")//um pedido (One) para muitos produtos (Many) 
+	@OneToMany (mappedBy="pedido", cascade = CascadeType.ALL)//um pedido (One) para muitos produtos (Many) 
 	private List<ItemPedido> itens = new ArrayList<>();
 	
 	public Pedido() {
