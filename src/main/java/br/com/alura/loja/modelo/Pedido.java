@@ -2,6 +2,7 @@ package br.com.alura.loja.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -24,14 +25,19 @@ public class Pedido {
 	@ManyToOne //vários pedidos (Many) podem pertencer a um cliente (One);
 	private Cliente cliente;
 	
-	@OneToMany //um pedido (One) para muitos produtos (Many) 
-	private List<ItemPedido> produtos;
+	@OneToMany (mappedBy="pedido")//um pedido (One) para muitos produtos (Many) 
+	private List<ItemPedido> itens = new ArrayList<>();
 	
 	public Pedido() {
 	}
 
 	public Pedido(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	public void adicionarItem(ItemPedido item) {
+		item.setPedido(this);
+		this.itens.add(item);
 	}
 
 	public BigDecimal getValorTotal() {
