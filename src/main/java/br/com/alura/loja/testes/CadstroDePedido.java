@@ -33,8 +33,11 @@ public class CadstroDePedido {
 		
 		Pedido pedido = new Pedido(cliente);
 		PedidoDao pedidoDao = new PedidoDao(em);
-		pedido.adicionarItem(new ItemPedido(10, pedido, produto));
+		pedido.adicionarItem(new ItemPedido(5, pedido, produto));
 		pedidoDao.cadastrarPedido(pedido);
+		
+		BigDecimal valorTotal = pedidoDao.valorTotalVendido();
+		System.out.println("Valor total: R$" + valorTotal);
 		
 		
 		em.getTransaction().commit();
@@ -49,7 +52,7 @@ public class CadstroDePedido {
 
 		Categoria categoria = new Categoria("CELULARES");
 		
-		Produto produto = new Produto("Iphone 11", "Iphone 11 - Camila", new BigDecimal("5000.0"), categoria);
+		Produto produto = new Produto("Iphone 11", "Iphone 11 - Camila", new BigDecimal("1000.0"), categoria);
 		
 		ItemPedido itemPedido = new ItemPedido();
 		

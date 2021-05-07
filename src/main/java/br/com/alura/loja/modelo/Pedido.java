@@ -18,18 +18,19 @@ import javax.persistence.Table;
 @Entity
 @Table(name="pedidos")
 public class Pedido {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name="valor_total")
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotal = BigDecimal.ZERO;
 	private LocalDate data = LocalDate.now();
 	
 	@ManyToOne //vários pedidos (Many) podem pertencer a um cliente (One);
 	private Cliente cliente;
 	
-	@OneToMany (mappedBy="pedido", cascade = CascadeType.ALL)//um pedido (One) para muitos produtos (Many) 
+	@OneToMany (mappedBy="pedido", cascade = CascadeType.ALL) //um pedido (One) para muitos produtos (Many) 
 	private List<ItemPedido> itens = new ArrayList<>();
 	
 	public Pedido() {
@@ -42,6 +43,7 @@ public class Pedido {
 	public void adicionarItem(ItemPedido item) {
 		item.setPedido(this);
 		this.itens.add(item);
+		this.valorTotal = this.valorTotal.add(item.getValor());
 	}
 
 	public BigDecimal getValorTotal() {
@@ -59,7 +61,5 @@ public class Pedido {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
-	
-	
+		
 }
