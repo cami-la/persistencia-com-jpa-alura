@@ -25,7 +25,7 @@ public class Pedido {
 	private Cliente cliente;
 	
 	@OneToMany //um pedido (One) para muitos itens (Many) 
-	private List<ItemPedidos> produtos;
+	private List<ItemPedido> produtos;
 	
 	public Pedido() {
 	}
