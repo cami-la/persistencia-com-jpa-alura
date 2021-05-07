@@ -30,13 +30,12 @@ public class Pedido {
 	@ManyToOne //vários pedidos (Many) podem pertencer a um cliente (One);
 	private Cliente cliente;
 	
-<<<<<<< HEAD
+
 	@OneToMany (mappedBy="pedido", cascade = CascadeType.ALL) //um pedido (One) para muitos produtos (Many) 
 	private List<ItemPedido> itens = new ArrayList<>();
-=======
 	@OneToMany //um pedido (One) para muitos itens (Many) 
 	private List<ItemPedido> produtos;
->>>>>>> branch 'master' of https://github.com/cami-la/persistencia-com-jpa-alura.git
+
 	
 	public Pedido() {
 	}
