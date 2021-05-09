@@ -15,6 +15,7 @@ import br.com.alura.loja.modelo.ItemPedido;
 import br.com.alura.loja.modelo.Pedido;
 import br.com.alura.loja.modelo.Produto;
 import br.com.alura.loja.util.JPAUtil;
+import br.com.alura.loja.vo.RelatorioDeVendasVo;
 
 public class CadastroDePedido {
 
@@ -23,29 +24,39 @@ public class CadastroDePedido {
 		em.getTransaction().begin();		
 		
 		populaBancoDeDados();
-
-		ProdutoDao produtoDao = new ProdutoDao(em);
-		Produto produto = produtoDao.buscarPorId(1l);
-		produtoDao.cadastrar(produto);
 		
 		ClienteDao clienteDao = new ClienteDao(em);
 		Cliente cliente = clienteDao.buscaPorId(1l);		
+
+		ProdutoDao produtoDao = new ProdutoDao(em);
+		Produto produto1 = produtoDao.buscarPorId(1l);
+		Produto produto2 = produtoDao.buscarPorId(2l);
+		Produto produto3 = produtoDao.buscarPorId(3l);
+
+		produtoDao.cadastrar(produto1);
+		produtoDao.cadastrar(produto2);
+		produtoDao.cadastrar(produto3);	
 		
 		
-		Pedido pedido = new Pedido(cliente);
+		Pedido pedido1 = new Pedido(cliente);
+		pedido1.adicionarItem(new ItemPedido(10, pedido1, produto1));
+		pedido1.adicionarItem(new ItemPedido(40, pedido1, produto2));
+		
+		Pedido pedido2 = new Pedido(cliente);
+		pedido1.adicionarItem(new ItemPedido(2, pedido2, produto3));
+		
+		
 		PedidoDao pedidoDao = new PedidoDao(em);
-		pedido.adicionarItem(new ItemPedido(5, pedido, produto));
-		pedidoDao.cadastrarPedido(pedido);
+		pedidoDao.cadastrarPedido(pedido1);
+		pedidoDao.cadastrarPedido(pedido2);
+
 		
 		BigDecimal valorTotal = pedidoDao.valorTotalVendido();
 		System.out.println("Valor total: R$" + valorTotal);
 		
-		List<Object[]> relatorioDeVendas = pedidoDao.relatorioDeVendas();
-		for (Object[] objects : relatorioDeVendas) {
-			System.out.println(objects[0]);
-			System.out.println(objects[1]);
-			System.out.println(objects[2]);
-		}
+		
+		List<RelatorioDeVendasVo> relatorioDeVendas = pedidoDao.relatorioDeVendas();
+		relatorioDeVendas.forEach(System.out::println);
 		
 		em.getTransaction().commit();
 		em.close();
@@ -57,19 +68,28 @@ public class CadastroDePedido {
 		EntityManager em = JPAUtil.getEntityManager();
 		em.getTransaction().begin();
 
-		Categoria categoria = new Categoria("CELULARES");
-		
-		Produto produto = new Produto("Iphone 11", "Iphone 11 - Camila", new BigDecimal("1000.0"), categoria);
+		Categoria celulares = new Categoria("CELULARES");
+		Categoria videogames = new Categoria("VIDEOGAMES");
+		Categoria informatica = new Categoria("INFORMATICA");
+
+		Produto celular = new Produto("Iphone 11", "Iphone 11", new BigDecimal("1000.0"), celulares);
+		Produto videogame = new Produto("PS5", "Playstation 5", new BigDecimal("2000.0"), videogames);
+		Produto macbook = new Produto("Macbook", "Macbook Pro", new BigDecimal("12000.0"), informatica);
+
 		
 		ItemPedido itemPedido = new ItemPedido();
 		
 		Cliente cliente = new Cliente("Camila", "123456789");
 
 		CategoriaDao categoriaDao = new CategoriaDao(em);
-		categoriaDao.cadastrar(categoria);
+		categoriaDao.cadastrar(celulares);
+		categoriaDao.cadastrar(videogames);
+		categoriaDao.cadastrar(informatica);		
 
 		ProdutoDao produtoDao = new ProdutoDao(em);
-		produtoDao.cadastrar(produto);
+		produtoDao.cadastrar(celular);
+		produtoDao.cadastrar(videogame);
+		produtoDao.cadastrar(macbook);
 		
 		ClienteDao clienteDao = new ClienteDao(em);
 		clienteDao.cadastroCliente(cliente);
