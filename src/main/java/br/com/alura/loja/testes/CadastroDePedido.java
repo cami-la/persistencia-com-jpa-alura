@@ -1,6 +1,7 @@
 package br.com.alura.loja.testes;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -15,7 +16,7 @@ import br.com.alura.loja.modelo.Pedido;
 import br.com.alura.loja.modelo.Produto;
 import br.com.alura.loja.util.JPAUtil;
 
-public class CadstroDePedido {
+public class CadastroDePedido {
 
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
@@ -39,6 +40,12 @@ public class CadstroDePedido {
 		BigDecimal valorTotal = pedidoDao.valorTotalVendido();
 		System.out.println("Valor total: R$" + valorTotal);
 		
+		List<Object[]> relatorioDeVendas = pedidoDao.relatorioDeVendas();
+		for (Object[] objects : relatorioDeVendas) {
+			System.out.println(objects[0]);
+			System.out.println(objects[1]);
+			System.out.println(objects[2]);
+		}
 		
 		em.getTransaction().commit();
 		em.close();
