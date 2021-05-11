@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +28,7 @@ public class Pedido {
 	private BigDecimal valorTotal = BigDecimal.ZERO;
 	private LocalDate data = LocalDate.now();
 	
-	@ManyToOne //vários pedidos (Many) podem pertencer a um cliente (One);
+	@ManyToOne(fetch = FetchType.LAZY) //vários pedidos (Many) podem pertencer a um cliente (One);
 	private Cliente cliente;
 	
 
@@ -65,5 +66,38 @@ public class Pedido {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+	public List<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<ItemPedido> itens) {
+		this.itens = itens;
+	}
+
+	public List<ItemPedido> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<ItemPedido> produtos) {
+		this.produtos = produtos;
+	}
+
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", valorTotal=" + valorTotal + ", data=" + data + ", cliente=" + cliente
+				+ ", itens=" + itens + ", produtos=" + produtos + "]";
+	}
 		
+	
 }

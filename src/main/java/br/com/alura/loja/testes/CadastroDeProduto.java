@@ -46,8 +46,8 @@ public class CadastroDeProduto {
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		CategoriaDao categoriaDao = new CategoriaDao(em);
 		
-		categoriaDao.cadastrar(celulares);
-		produtoDao.cadastrar(produto);
+		categoriaDao.cadastrarCategoria(celulares);
+		produtoDao.cadastrarProduto(produto);
 		
 		em.getTransaction().commit();
 		em.close();

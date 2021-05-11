@@ -13,7 +13,7 @@ public class CategoriaDao {
 		this.em = em;
 	}
 	
-	public void cadastrar(Categoria categoria) {
+	public void cadastrarCategoria(Categoria categoria) {
 		this.em.persist(categoria);
 	}
 	

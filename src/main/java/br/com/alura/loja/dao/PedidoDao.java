@@ -39,4 +39,10 @@ public class PedidoDao {
 		return this.em.createQuery(jpql, RelatorioDeVendasVo.class)
 				.getResultList();
 	}
+	
+	public Pedido buscarPorId(Long id) {
+		return this.em.find(Pedido.class, id);
+	}
+	
+	
 }

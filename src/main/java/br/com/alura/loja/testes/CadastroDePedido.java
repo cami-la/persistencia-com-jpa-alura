@@ -33,9 +33,9 @@ public class CadastroDePedido {
 		Produto produto2 = produtoDao.buscarPorId(2l);
 		Produto produto3 = produtoDao.buscarPorId(3l);
 
-		produtoDao.cadastrar(produto1);
-		produtoDao.cadastrar(produto2);
-		produtoDao.cadastrar(produto3);	
+		produtoDao.cadastrarProduto(produto1);
+		produtoDao.cadastrarProduto(produto2);
+		produtoDao.cadastrarProduto(produto3);	
 		
 		
 		Pedido pedido1 = new Pedido(cliente);
@@ -82,14 +82,14 @@ public class CadastroDePedido {
 		Cliente cliente = new Cliente("Camila", "123456789");
 
 		CategoriaDao categoriaDao = new CategoriaDao(em);
-		categoriaDao.cadastrar(celulares);
-		categoriaDao.cadastrar(videogames);
-		categoriaDao.cadastrar(informatica);		
+		categoriaDao.cadastrarCategoria(celulares);
+		categoriaDao.cadastrarCategoria(videogames);
+		categoriaDao.cadastrarCategoria(informatica);		
 
 		ProdutoDao produtoDao = new ProdutoDao(em);
-		produtoDao.cadastrar(celular);
-		produtoDao.cadastrar(videogame);
-		produtoDao.cadastrar(macbook);
+		produtoDao.cadastrarProduto(celular);
+		produtoDao.cadastrarProduto(videogame);
+		produtoDao.cadastrarProduto(macbook);
 		
 		ClienteDao clienteDao = new ClienteDao(em);
 		clienteDao.cadastroCliente(cliente);

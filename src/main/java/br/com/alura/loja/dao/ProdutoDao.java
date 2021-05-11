@@ -14,7 +14,7 @@ public class ProdutoDao {
 		this.em = em;
 	}
 
-	public void cadastrar(Produto produto) {
+	public void cadastrarProduto(Produto produto) {
 		this.em.persist(produto);
 	}
 
