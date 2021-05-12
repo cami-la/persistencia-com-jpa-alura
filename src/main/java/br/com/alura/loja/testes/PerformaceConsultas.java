@@ -29,14 +29,18 @@ public class PerformaceConsultas {
 		
 		PedidoDao pedidoDao = new PedidoDao(em);
 		Pedido buscarPorIdPedido = pedidoDao.buscarPorId(1l);
-		System.out.println(buscarPorIdPedido.getItens().size());
+		System.out.println(buscarPorIdPedido.getData());
 		
+		Pedido buscarPedidoComCliente = pedidoDao.buscarPedidoComCliente(1l);
+		System.out.println(buscarPorIdPedido.getCliente().getNome());
+
 		em.getTransaction().commit();
+		
 		em.close();
 	}
 
 	private static void popularBancoDeDados() {
-		EntityManager em = JPAUtil.getEntityManager();
+		EntityManager em = JPAUtil.getEntityManager(); //Ponte para o banco de dados
 		
 		//instaciando as classes
 		Cliente cliente = new Cliente("Camila", "01234");
