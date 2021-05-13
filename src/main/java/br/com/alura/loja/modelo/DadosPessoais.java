@@ -9,7 +9,6 @@ public class DadosPessoais {
 	private String cpf;
 	
 	
-
 	public DadosPessoais() {
 	}
 

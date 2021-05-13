@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import br.com.alura.loja.dao.CategoriaDao;
 import br.com.alura.loja.dao.ProdutoDao;
 import br.com.alura.loja.modelo.Categoria;
+import br.com.alura.loja.modelo.CategoriaId;
 import br.com.alura.loja.modelo.Produto;
 import br.com.alura.loja.util.JPAUtil;
 
@@ -16,6 +17,7 @@ public class CadastroDeProduto {
 		cadastrarProduto();
 		
 		EntityManager em = JPAUtil.getEntityManager();	
+		em.getTransaction().begin();
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		
 		Produto produto = produtoDao.buscarPorId(1l);
@@ -32,6 +34,12 @@ public class CadastroDeProduto {
 		
 		BigDecimal precoDoProduto = produtoDao.buscarPrecoDoProdutoComNome("Xiomi Redmi");
 		System.out.println("Preço do Produto: R$" + precoDoProduto);
+		
+		em.getTransaction().commit();
+		
+		Categoria find = em.find(Categoria.class, new CategoriaId("CELULARES", "xpto"));
+		System.out.print(find.tipoCategoria());
+		em.close();
 	}
 	
 
