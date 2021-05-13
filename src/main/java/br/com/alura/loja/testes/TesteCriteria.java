@@ -22,7 +22,7 @@ public class TesteCriteria {
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		List<Produto> buscarPorParametrosComCriteria = produtoDao.buscarPorParametrosComCriteria("Iphone", null, null);
 		
-		buscarPorParametrosComCriteria.forEach(System.out::println);
+		buscarPorParametrosComCriteria.forEach(produto -> System.out.println(produto.getNome()));
 	}
 	
 	public static void popularBancoDeDados() {
