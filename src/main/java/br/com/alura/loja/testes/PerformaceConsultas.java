@@ -32,11 +32,11 @@ public class PerformaceConsultas {
 		System.out.println(buscarPorIdPedido.getData());
 		
 		Pedido buscarPedidoComCliente = pedidoDao.buscarPedidoComCliente(1l);
-		System.out.println(buscarPorIdPedido.getCliente().getNome());
 
 		em.getTransaction().commit();
 		
 		em.close();
+		System.out.println(buscarPorIdPedido.getCliente().getNomeCliente());
 	}
 
 	private static void popularBancoDeDados() {
